@@ -353,7 +353,7 @@ object Plugin extends sbt.Plugin {
           def loop(dir: File, prefix: String, acc: Seq[(File, String)]): Seq[(File, String)] = {
             val children = (dir * new SimpleFileFilter(f => !excluded(f))).get
             children.flatMap { f =>
-              val rel = (if(prefix.isEmpty) "" else prefix + "/") + f.getName
+              val rel = (if(prefix.isEmpty) "" else prefix + File.separator) + f.getName
               val pairAcc = (f -> rel) +: acc
               if(f.isDirectory) loop(f, rel, pairAcc) else pairAcc
             }
